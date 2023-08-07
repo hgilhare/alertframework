@@ -12,3 +12,9 @@ Scenario: verify alert 2nd popup with accept
 
 And user click on 2nd click me button
 And user accept the popup
+
+@Reg
+Scenario: verify alert popup with reject
+
+And user click on 2nd click me button
+And user reject the popup

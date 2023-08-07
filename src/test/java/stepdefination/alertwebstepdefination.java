@@ -29,5 +29,10 @@ public class alertwebstepdefination {
 	public void user_accept_the_popup() {
 		m.user_accept_the_popup();
 	}
+	@And("user reject the popup")
+	public void user_reject_the_popup() {
+		
+		m.user_reject_the_popup();
+	}    
 
 }

@@ -40,4 +40,10 @@ public void user_accept_the_popup() {
 	alertaccepted();
 	
 }
+
+public void user_reject_the_popup() {
+	alertdismiss();
+	
+	
+} 
 }
