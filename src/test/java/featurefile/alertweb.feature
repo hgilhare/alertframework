@@ -31,10 +31,9 @@ Examples:
 |Name|
 |Himanshu|
 |Shubham|
-<<<<<<< HEAD
 |sumeet|
 |pranjal|
 |anshu|
-=======
-|sumeet|
->>>>>>> 99e56786dda1924b1ae4a88da3d0471ab6da7d2d
+
+
+
