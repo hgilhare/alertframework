@@ -18,3 +18,19 @@ Scenario: verify alert popup with reject
 
 And user click on 2nd click me button
 And user reject the popup
+
+@Reg
+Scenario Outline: verify alert with enter data and accept
+
+And user click on 3rd clickme button
+And user click enter the data "<Name>"
+And  User click on accept
+
+Examples:
+
+|Name|
+|Himanshu|
+|Shubham|
+|sumeet|
+|pranjal|
+|anshu|
