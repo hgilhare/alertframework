@@ -49,10 +49,9 @@ public class alertwebstepdefination {
 
 	}
 
-	
-@And("User click on accept")
-public void User_click_on_accept() {
- m.User_click_on_accept();
-	
-}
+	@And("User click on accept")
+	public void User_click_on_accept() {
+		m.User_click_on_accept();
+
+	}
 }
