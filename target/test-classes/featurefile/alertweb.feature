@@ -36,8 +36,7 @@ Examples:
 |anshu|
 |salmaan|
 |shahruk|
-|AAmir|
-|Akshay|
-|vickey|
+
+
 
 
