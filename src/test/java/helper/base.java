@@ -59,11 +59,19 @@ public void setup() {
 
 	String browsername = prop.getProperty("browser");
 	if (browsername.equals("chrome")) {
-		ChromeOptions option = new ChromeOptions();
-		option.addArguments("--remote-allow-origins=*");
-		option.addArguments("--incognito");
+	
+		WebDriverManager.chromedriver().setup();
+		driver=new ChromeDriver();
+		
+		
+		
+		
+		
+		//ChromeOptions option = new ChromeOptions();
+		///option.addArguments("--remote-allow-origins=*");
+		//option.addArguments("--incognito");
 
-		driver = new ChromeDriver(option);
+	//	driver = new ChromeDriver(option);
 	} else if (browsername.equals("edge")) {
 		WebDriverManager.edgedriver().setup();
 		driver = new EdgeDriver();
