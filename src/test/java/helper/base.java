@@ -29,18 +29,19 @@ import io.cucumber.java.Scenario;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class base {
-	
+
 	public static WebDriver driver;
 	public static Properties prop;
-	
+
 	static {
 		FileInputStream file;
-		
+
 		try {
-			file = new FileInputStream(System.getProperty("user.dir")+"/src/test/java/propertyfile/alertwebproperty.properties");
-	prop = new Properties();
-	prop.load(file);
-		
+			file = new FileInputStream(
+					System.getProperty("user.dir") + "/src/test/java/propertyfile/alertwebproperty.properties");
+			prop = new Properties();
+			prop.load(file);
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -48,120 +49,112 @@ public class base {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-	}
-	
-	
 
-
-@Before
-public void setup() {
-
-	String browsername = prop.getProperty("browser");
-	if (browsername.equals("chrome")) {
-	
-		WebDriverManager.chromedriver().setup();
-		driver=new ChromeDriver();
-		
-		
-		
-		
-		
-		//ChromeOptions option = new ChromeOptions();
-		///option.addArguments("--remote-allow-origins=*");
-		//option.addArguments("--incognito");
-
-	//	driver = new ChromeDriver(option);
-	} else if (browsername.equals("edge")) {
-		WebDriverManager.edgedriver().setup();
-		driver = new EdgeDriver();
 	}
 
-	driver.manage().window().maximize();
-	driver.get(prop.getProperty("url"));
+	@Before
+	public void setup() {
 
-}
-@After
-public void teardown(Scenario s) throws IOException {
-	if(s.isFailed()) {
-		TakesScreenshot t= (TakesScreenshot)driver;
-	File src=	t.getScreenshotAs(OutputType.FILE);
-	FileUtils.copyFile(src,new File ("screenshots/"+s.getName()+".png"));
-		
+		String browsername = prop.getProperty("browser");
+		if (browsername.equals("chrome")) {
+
+			WebDriverManager.chromedriver().setup();
+			driver = new ChromeDriver();
+
+			// ChromeOptions option = new ChromeOptions();
+			/// option.addArguments("--remote-allow-origins=*");
+			// option.addArguments("--incognito");
+
+			// driver = new ChromeDriver(option);
+		} else if (browsername.equals("edge")) {
+			WebDriverManager.edgedriver().setup();
+			driver = new EdgeDriver();
+		}
+
+		driver.manage().window().maximize();
+		driver.get(prop.getProperty("url"));
+
 	}
 
-	driver.quit();
-}
+	@After
+	public void teardown(Scenario s) throws IOException {
+		if (s.isFailed()) {
+			TakesScreenshot t = (TakesScreenshot) driver;
+			File src = t.getScreenshotAs(OutputType.FILE);
+			FileUtils.copyFile(src, new File("screenshots/" + s.getName() + ".png"));
 
-public void selectbyvisibletext(By location, String value) {
-	WebElement ele = driver.findElement(location);
-	Select s = new Select(ele);
-	s.selectByVisibleText(value);
-}
+		}
 
-public void selectbyindex(By location, int value) {
-	WebElement ele = driver.findElement(location);
-	Select s = new Select(ele);
-	s.selectByIndex(value);
-}
+		driver.quit();
+	}
 
-public void selectbyvalue(By location, String value) {
-	WebElement ele = driver.findElement(location);
-	Select s = new Select(ele);
-	s.selectByValue(value);
-}
+	public void selectbyvisibletext(By location, String value) {
+		WebElement ele = driver.findElement(location);
+		Select s = new Select(ele);
+		s.selectByVisibleText(value);
+	}
 
-public void mousehover(By abc) {
-	WebElement ele = driver.findElement(abc);
-	Actions a = new Actions(driver);
-	a.moveToElement(ele).build().perform();
+	public void selectbyindex(By location, int value) {
+		WebElement ele = driver.findElement(location);
+		Select s = new Select(ele);
+		s.selectByIndex(value);
+	}
 
-}
+	public void selectbyvalue(By location, String value) {
+		WebElement ele = driver.findElement(location);
+		Select s = new Select(ele);
+		s.selectByValue(value);
+	}
 
-public void normalclick(By location) {
+	public void mousehover(By abc) {
+		WebElement ele = driver.findElement(abc);
+		Actions a = new Actions(driver);
+		a.moveToElement(ele).build().perform();
 
-	WebElement ele = driver.findElement(location);
-	ele.click();
-}
+	}
 
-public void clickbyexecutor(By location) {
-	WebElement ele = driver.findElement(location);
-	JavascriptExecutor js = (JavascriptExecutor) driver;
-	js.executeScript("arguments[0].click();", ele);
-}
+	public void normalclick(By location) {
 
-public void alertaccepted() {
+		WebElement ele = driver.findElement(location);
+		ele.click();
+	}
 
-	Alert a = driver.switchTo().alert();
-	a.accept();
-}
+	public void clickbyexecutor(By location) {
+		WebElement ele = driver.findElement(location);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", ele);
+	}
 
-public void alertdismiss() {
+	public void alertaccepted() {
 
-	Alert a = driver.switchTo().alert();
-	a.dismiss();
-}
+		Alert a = driver.switchTo().alert();
+		a.accept();
+	}
 
-public void alertsendkey(String value) {
-	Alert a = driver.switchTo().alert();
-	a.sendKeys(value);
-	a.accept();
+	public void alertdismiss() {
 
-}
+		Alert a = driver.switchTo().alert();
+		a.dismiss();
+	}
 
-public WebElement waitforexpectedelement(By by) {
+	public void alertsendkey(String value) {
+		Alert a = driver.switchTo().alert();
+		a.sendKeys(value);
+		a.accept();
 
-	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-	return wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-}
+	}
 
-public void takesnap() throws IOException {
+	public WebElement waitforexpectedelement(By by) {
 
-	TakesScreenshot t = (TakesScreenshot) driver;
-	File src = t.getScreenshotAs(OutputType.FILE);
-	FileUtils.copyFile(src, new File("screenshots/test.png"));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		return wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+	}
 
+	public void takesnap() throws IOException {
 
+		TakesScreenshot t = (TakesScreenshot) driver;
+		File src = t.getScreenshotAs(OutputType.FILE);
+		FileUtils.copyFile(src, new File("screenshots/test.png"));
 
-}
+	}
 }
